@@ -15,6 +15,9 @@
 		1C28A81D262E84570036951E /* SwiftUIKitCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1C28A81B262E84570036951E /* SwiftUIKitCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1C28A823262E850D0036951E /* SwiftUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C28A822262E850D0036951E /* SwiftUIKit.framework */; };
 		1C28A824262E850D0036951E /* SwiftUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1C28A822262E850D0036951E /* SwiftUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1C28A8DF26314DF10036951E /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A8DE26314DF10036951E /* Themes.swift */; };
+		1C28A8E6263155410036951E /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A8E5263155410036951E /* Styles.swift */; };
+		1C28A8F5263172320036951E /* BasicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A8F4263172320036951E /* BasicVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,6 +47,9 @@
 		1C28A816262E83670036951E /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Core.framework; path = SwiftUIKit/Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C28A81B262E84570036951E /* SwiftUIKitCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftUIKitCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C28A822262E850D0036951E /* SwiftUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C28A8DE26314DF10036951E /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
+		1C28A8E5263155410036951E /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
+		1C28A8F4263172320036951E /* BasicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +85,7 @@
 		1C28A7B2262E7D9D0036951E /* SwiftUIKit-Example */ = {
 			isa = PBXGroup;
 			children = (
+				1C28A8DD26314DE00036951E /* Manager */,
 				1C28A7CE262E7E5B0036951E /* Views */,
 				1C28A7CD262E7E4C0036951E /* Resources */,
 				1C28A7CC262E7E250036951E /* SupportFiles */,
@@ -108,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				1C28A7CF262E7E740036951E /* HomeVC.swift */,
+				1C28A8F4263172320036951E /* BasicVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -122,6 +130,15 @@
 				1C28A7D4262E7F670036951E /* SwiftUIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1C28A8DD26314DE00036951E /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				1C28A8DE26314DF10036951E /* Themes.swift */,
+				1C28A8E5263155410036951E /* Styles.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,7 +212,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C28A7B4262E7D9D0036951E /* AppDelegate.swift in Sources */,
+				1C28A8DF26314DF10036951E /* Themes.swift in Sources */,
 				1C28A7D0262E7E740036951E /* HomeVC.swift in Sources */,
+				1C28A8F5263172320036951E /* BasicVC.swift in Sources */,
+				1C28A8E6263155410036951E /* Styles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,13 +355,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 556LZQ7WUH;
+				DEVELOPMENT_TEAM = V986M848KK;
 				INFOPLIST_FILE = "SwiftUIKit-Example/SupportFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.misshypocrite.swiftuikit.example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.misshypocrite.swiftuikit.example.fo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -354,13 +374,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 556LZQ7WUH;
+				DEVELOPMENT_TEAM = V986M848KK;
 				INFOPLIST_FILE = "SwiftUIKit-Example/SupportFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.misshypocrite.swiftuikit.example;
+				PRODUCT_BUNDLE_IDENTIFIER = com.misshypocrite.swiftuikit.example.fo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

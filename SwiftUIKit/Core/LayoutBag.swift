@@ -37,7 +37,7 @@ public class BlockRevertable: LayoutRevertable {
     
     private var revertBlockes: [(() -> Void)] = []
     
-    init(_ block: @escaping () -> Void) {
+    public init(_ block: @escaping () -> Void) {
         self.revertBlockes = [block]
     }
     
