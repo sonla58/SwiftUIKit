@@ -36,3 +36,13 @@ class BasicVC: UI.ViewController {
         print("\(String(describing: self)) deinit")
     }
 }
+
+class AwesomeView: UI.View {
+    override var subviewsLayout: SomeView {
+        ZStackView {
+            
+        }
+        .dx.backgroundColor(.white)
+        .fillingParent()
+    }
+}
