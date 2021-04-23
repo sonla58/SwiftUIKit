@@ -26,7 +26,7 @@ public struct Layout<Node: ViewNode>: View {
 public struct EmptyLayout: View {
     public init() { }
     
-    public func makeViewNode(_ compositteRevertable: LayoutRevertable) -> some ViewNode {
-        EmptyNode()
+    public func makeViewNode(_ compositteRevertable: LayoutRevertable) -> Layout<EmptyNode> {
+        return Layout.just(EmptyNode())
     }
 }
