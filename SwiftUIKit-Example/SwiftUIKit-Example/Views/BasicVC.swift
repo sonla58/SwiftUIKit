@@ -17,7 +17,20 @@ class BasicVC: UI.ViewController {
     }
     
     override var subviewsLayout: SomeView {
-        ZStackView {
+//        ZStackView {
+//            UILabel()
+//                .dx.text("Start")
+//                .centeringInParent()
+//        }
+//        .dx.backgroundColor(ThemeManager.shared.current.box1)
+//        .dx.startAddGesture
+//        .action {
+//            print("something")
+//        }
+//        .commitGesture()
+//        .sizing(width: 300, height: 58)
+//        .centeringInParent()
+        UI.View {
             UILabel()
                 .dx.text("Start")
                 .centeringInParent()

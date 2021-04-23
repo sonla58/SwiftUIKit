@@ -13,6 +13,24 @@ extension UI {
         
         public var layoutBag = LayoutBag()
         
+        private var layouts: [SomeView] = []
+        
+        public convenience init(_ layouts: [SomeView]) {
+            self.init(frame: .zero)
+            self.layouts = layouts
+            
+            setup()
+            defineLayout()
+        }
+        
+        public convenience init(@LayoutBuilder _ layoutBuilder: () -> [SomeView]) {
+            self.init(frame: .zero)
+            self.layouts = layoutBuilder()
+            
+            setup()
+            defineLayout()
+        }
+        
         public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
             super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
             setup()
