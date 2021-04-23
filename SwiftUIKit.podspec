@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-  spec.source       = { :git => "https://github.com/sonla58/SwiftUIKit", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/sonla58/SwiftUIKit.git", :tag => "#{spec.version}" }
   # spec.source       = { :git => "https://github.com/sonla58/SwiftUIKit.git", :branch => "master" }
 
 
