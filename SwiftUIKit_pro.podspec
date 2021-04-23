@@ -2,9 +2,9 @@ Pod::Spec.new do |spec|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-  spec.name         = "SwiftUIKit"
+  spec.name         = "SwiftUIKit_pro"
   spec.version      = "1.0.rc1"
-  spec.summary      = "SwiftUIKit combines the element of UIKit with declarative style from SwiftUI."
+  spec.summary      = "SwiftUIKit combines the element of UIKit with declarative style from SwiftUI. `_pro` surface avoid conflic module name in CocoaPods."
 
   spec.homepage     = "https://github.com/sonla58/SwiftUIKit"
 
