@@ -64,7 +64,7 @@ This project was strongly inspired by [Layoutless](https://github.com/Declarativ
 
 Add following line to your project's Podfile
 ```ruby
-pod 'SwiftUIKit', '1.0.rc1'
+pod 'SwiftUIKit_pro', '1.0.rc1'
 ```
 Run `pod install` to install SwiftUIKit
 
