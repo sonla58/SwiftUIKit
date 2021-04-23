@@ -60,7 +60,17 @@ This project was strongly inspired by [Layoutless](https://github.com/Declarativ
 
 # Installation
 
-Updating...
+## CocoaPods
+
+Add following line to your project's Podfile
+```ruby
+pod 'SwiftUIKit', '1.0.rc1'
+```
+Run `pod install` to install SwiftUIKit
+
+## Source Code
+
+Drop all files in folder `./SwiftUIKit` to your project or download this repo and drag `SwiftUIKit.xcodeproj` to your project with necessary files then link your app with `SwiftUIKit` framework munualy
 
 # Usage
 
