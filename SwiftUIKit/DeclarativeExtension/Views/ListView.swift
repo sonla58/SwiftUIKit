@@ -7,12 +7,17 @@
 
 import UIKit
 
-public class ListView: UITableView {
-    public var layouts: [SomeView]
+open class ListView: UITableView {
+//    public var layouts: [SomeView]
     public var layoutBag = LayoutBag()
+    public var sections: [SectionList]
     
     required public init(_ style: UITableView.Style, layouts: [SomeView]) {
-        self.layouts = layouts
+        self.sections = [
+            SectionList(cellBuilder: { () -> [SomeView] in
+                return layouts
+            })
+        ]
         
         super.init(frame: .zero, style: style)
         
@@ -21,7 +26,12 @@ public class ListView: UITableView {
     }
     
     required public init(_ style: UITableView.Style, @LayoutBuilder layoutBuilder: () -> [SomeView]) {
-        self.layouts = layoutBuilder()
+        let layouts = layoutBuilder()
+        self.sections = [
+            SectionList(cellBuilder: { () -> [SomeView] in
+                return layouts
+            })
+        ]
         
         super.init(frame: .zero, style: style)
         
@@ -31,10 +41,47 @@ public class ListView: UITableView {
     
     required public init<Item>(_ style: UITableView.Style, items: [Item], @LayoutBuilder layoutBuilder: (_ index: Int, _ item: Item) -> [SomeView]) {
         
-        self.layouts = items.enumerated()
+        let layouts = items.enumerated()
             .reduce([SomeView](), { (seed, next) -> [SomeView] in
                 seed + layoutBuilder(next.offset, next.element)
             })
+        self.sections = [
+            SectionList(cellBuilder: { () -> [SomeView] in
+                return layouts
+            })
+        ]
+        
+        super.init(frame: .zero, style: style)
+        
+        self.setup()
+        self.defineLayout()
+    }
+    
+    required public init(_ style: UITableView.Style, sections: [SectionList]) {
+        self.sections = sections
+        
+        super.init(frame: .zero, style: style)
+        
+        self.setup()
+        self.defineLayout()
+    }
+    
+    required public init(_ style: UITableView.Style, @SectionListBuilder sectionBuilder: () -> [SectionList]) {
+        self.sections = sectionBuilder()
+        
+        super.init(frame: .zero, style: style)
+        
+        self.setup()
+        self.defineLayout()
+    }
+    
+    required public init<Item>(_ style: UITableView.Style, items: [Item], @SectionListBuilder sectionBuilder: (_ index: Int, _ item: Item) -> [SectionList]) {
+        
+        let sections = items.enumerated()
+            .reduce([SectionList](), { (seed, next) -> [SectionList] in
+                seed + sectionBuilder(next.offset, next.element)
+            })
+        self.sections = sections
         
         super.init(frame: .zero, style: style)
         
@@ -44,19 +91,16 @@ public class ListView: UITableView {
     
     private func setup() {
         self.register(StaticCell.self, forCellReuseIdentifier: String(describing: StaticCell.self))
-//        layouts
-//            .compactMap { (v) -> UITableViewCell? in
-//                v as? UITableViewCell
-//            }
-//            .forEach { (cell) in
-//                self.register(type(of: cell).self, forCellReuseIdentifier: String(describing: type(of: cell).self))
-//            }
         self.delegate = self
         self.dataSource = self
+        
+        self.sectionHeaderHeight = UITableView.automaticDimension;
+        self.estimatedSectionHeaderHeight = 44;
+        
         self.defineLayout()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("Not support init from coder")
     }
     
@@ -97,19 +141,82 @@ public class StaticCell: UITableViewCell {
 }
 
 extension ListView: UITableViewDelegate, UITableViewDataSource {
+    
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sections.count
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return layouts.count
+        return sections[section].cells.count
+    }
+    
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if sections[section].headerView.isEmpty {
+            return nil
+        }
+        return ZStackView {
+            group(sections[section].headerView)
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if sections[section].headerView.isEmpty {
+            return 0
+        }
+        return UITableView.automaticDimension
+    }
+    
+    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if sections[section].footerView.isEmpty {
+            return nil
+        }
+        return ZStackView {
+            group(sections[section].footerView)
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if sections[section].footerView.isEmpty {
+            return 0
+        }
+        return UITableView.automaticDimension
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let layout = layouts[indexPath.row]
+        let layout = sections[indexPath.section].cells[indexPath.row]
         if let layout = layout as? UITableViewCell {
             return layout
         }
-        return StaticCell(layouts[indexPath.row])
+        return StaticCell(layout)
+    }
+}
+
+public class SectionList {
+    
+    var headerView: [SomeView]
+    var footerView: [SomeView]
+    var cells: [SomeView]
+    
+    public init(
+        @LayoutBuilder headerViewBuilder: () -> [SomeView] = { return [] },
+        @LayoutBuilder footerViewBuilder: () -> [SomeView] = { return [] },
+        @LayoutBuilder cellBuilder: () -> [SomeView]
+    ) {
+        self.headerView = headerViewBuilder()
+        self.footerView = footerViewBuilder()
+        self.cells = cellBuilder()
+    }
+    
+    public init<Item>(
+        @LayoutBuilder headerViewBuilder: () -> [SomeView] = { return [] },
+        @LayoutBuilder footerViewBuilder: () -> [SomeView] = { return [] },
+        items: [Item],
+        @LayoutBuilder cellBuilder: (_ index: Int, _ item: Item) -> [SomeView]
+    ) {
+        self.headerView = headerViewBuilder()
+        self.footerView = footerViewBuilder()
+        self.cells = items.enumerated().reduce([SomeView](), { (seed, next) -> [SomeView] in
+            seed + cellBuilder(next.offset, next.element)
+        })
     }
 }

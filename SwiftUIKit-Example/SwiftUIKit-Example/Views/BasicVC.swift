@@ -17,34 +17,25 @@ class BasicVC: UI.ViewController {
     }
     
     override var subviewsLayout: SomeView {
-//        ZStackView {
-//            UILabel()
-//                .dx.text("Start")
-//                .centeringInParent()
-//        }
-//        .dx.backgroundColor(ThemeManager.shared.current.box1)
-//        .dx.startAddGesture
-//        .action {
-//            print("something")
-//        }
-//        .commitGesture()
-//        .sizing(width: 300, height: 58)
-//        .centeringInParent()
-        ListView(.grouped, items: Array(0...100)) { (index, item) in
-//            StaticCell(
-//                ZStackView {
-//                    UILabel()
-//                        .dx.text("\(item)")
-//                        .centeringInParent()
-//                }
-//                .sizing(width: nil, height: 60)
-//                .fillingParent()
-//            )
-//            .dx.selectionStyle(.none)
-            UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-                .dx.style { (cell) in
-                    cell.textLabel?.text = "\(item)"
+        ListView(.plain) {
+            SectionList(headerViewBuilder: { () -> [SomeView] in
+                ZStackView {
+                    UILabel()
+                        .dx.text("Header")
+                        .centeringVerticallyInParent()
+                        .stickingToParentEdges(left: 16)
                 }
+                .dx.backgroundColor(.white)
+                .sizing(width: nil, height: 44)
+                .fillingParent()
+            }, footerViewBuilder: { () -> [SomeView] in
+                return []
+            }, items: Array(0...100)) { (index, item) in
+                UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+                    .dx.style { (cell) in
+                        cell.textLabel?.text = "\(item)"
+                    }
+            }
         }
         .fillingParent()
     }
