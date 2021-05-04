@@ -8,10 +8,18 @@
 import UIKit
 
 open class ListView: UITableView {
-//    public var layouts: [SomeView]
+    
     public var layoutBag = LayoutBag()
     public var sections: [SectionList]
     
+    //========================================
+    //MARK: - Set of init function to create `ListView` with cell layut
+    //========================================
+    
+    /// Initialize a ListView (UITableView in UIKit) with a array of cell layout
+    /// - Parameters:
+    ///   - style: Style of UITableView, see `UITableView.Style`
+    ///   - layouts: Array of layout, each element of it should be a `UIView`, `ZStackView` or a `UITableViewCell`
     required public init(_ style: UITableView.Style, layouts: [SomeView]) {
         self.sections = [
             SectionList(cellBuilder: { () -> [SomeView] in
@@ -25,6 +33,10 @@ open class ListView: UITableView {
         self.defineLayout()
     }
     
+    /// Initialize a ListView (UITableView in UIKit) with a cell builder
+    /// - Parameters:
+    ///   - style: Style of UITableView, see `UITableView.Style`
+    ///   - layoutBuilder: a function builder to build array of layout, each element of it should be a `UIView`, `ZStackView`, `UITableViewCell`
     required public init(_ style: UITableView.Style, @LayoutBuilder layoutBuilder: () -> [SomeView]) {
         let layouts = layoutBuilder()
         self.sections = [
@@ -39,6 +51,11 @@ open class ListView: UITableView {
         self.defineLayout()
     }
     
+    /// Initialize a ListView (UITableView in UIKit) with a cell builder to build layout from datasource you provided
+    /// - Parameters:
+    ///   - style: Style of UITableView, see `UITableView.Style`
+    ///   - items: Datasource used to build cells
+    ///   - layoutBuilder:  function builder to build array of layout from datasource you provide in `items`, each element of it should be a `UIView`, `ZStackView`, `UITableViewCell`
     required public init<Item>(_ style: UITableView.Style, items: [Item], @LayoutBuilder layoutBuilder: (_ index: Int, _ item: Item) -> [SomeView]) {
         
         let layouts = items.enumerated()
@@ -57,6 +74,14 @@ open class ListView: UITableView {
         self.defineLayout()
     }
     
+    //========================================
+    //MARK: - Set of init function to create `ListView` with section
+    //========================================
+    
+    /// Initialize a ListView (UITableView in UIKit) with a array of section
+    /// - Parameters:
+    ///   - style: Style of UITableView, see `UITableView.Style`
+    ///   - sections: Array of `SectionList`
     required public init(_ style: UITableView.Style, sections: [SectionList]) {
         self.sections = sections
         
@@ -66,6 +91,10 @@ open class ListView: UITableView {
         self.defineLayout()
     }
     
+    /// Initialize a ListView (UITableView in UIKit) with a section builder
+    /// - Parameters:
+    ///   - style: Style of UITableView, see `UITableView.Style`
+    ///   - sectionBuilder: a function builder to build array of `SectionList`
     required public init(_ style: UITableView.Style, @SectionListBuilder sectionBuilder: () -> [SectionList]) {
         self.sections = sectionBuilder()
         
@@ -75,6 +104,11 @@ open class ListView: UITableView {
         self.defineLayout()
     }
     
+    /// Initialize a ListView (UITableView in UIKit) with a section builder
+    /// - Parameters:
+    ///   - style: Style of UITableView, see `UITableView.Style`
+    ///   - items: Datasource used to build cells
+    ///   - sectionBuilder: a function builder to build array of `SectionList` from datasource you provide in `items`
     required public init<Item>(_ style: UITableView.Style, items: [Item], @SectionListBuilder sectionBuilder: (_ index: Int, _ item: Item) -> [SectionList]) {
         
         let sections = items.enumerated()
@@ -88,6 +122,14 @@ open class ListView: UITableView {
         self.setup()
         self.defineLayout()
     }
+    
+    //========================================
+    //MARK: - Set of init function to create `ListView` with reuse cell
+    //========================================
+    
+    //========================================
+    //MARK: - Private func to setup and do its work
+    //========================================
     
     private func setup() {
         self.register(StaticCell.self, forCellReuseIdentifier: String(describing: StaticCell.self))
@@ -105,7 +147,7 @@ open class ListView: UITableView {
     }
     
     public func defineLayout() {
-//        layoutBag.append(group(layouts).layout(in: self))
+        //
     }
     
     open override func didMoveToSuperview() {
@@ -124,10 +166,14 @@ open class ListView: UITableView {
     }
 }
 
+//MARK: - StaticCell
+
 public class StaticCell: UITableViewCell {
     
     var content: SomeView
     
+    /// Initialize StaticCell with a `SwiftUIKit.View`.
+    /// - Parameter content: Content layout view will be add to Static Cell. You should layout content to its parent like: .fillingParent()
     public required init(_ content: SomeView) {
         self.content = content
         super.init(style: .default, reuseIdentifier: String(describing: Self.self))
@@ -139,6 +185,8 @@ public class StaticCell: UITableViewCell {
         fatalError()
     }
 }
+
+//MARK: - Conform ListView to: `UITableViewDelegate` and `UITableViewDataSource`
 
 extension ListView: UITableViewDelegate, UITableViewDataSource {
     
@@ -188,35 +236,5 @@ extension ListView: UITableViewDelegate, UITableViewDataSource {
             return layout
         }
         return StaticCell(layout)
-    }
-}
-
-public class SectionList {
-    
-    var headerView: [SomeView]
-    var footerView: [SomeView]
-    var cells: [SomeView]
-    
-    public init(
-        @LayoutBuilder headerViewBuilder: () -> [SomeView] = { return [] },
-        @LayoutBuilder footerViewBuilder: () -> [SomeView] = { return [] },
-        @LayoutBuilder cellBuilder: () -> [SomeView]
-    ) {
-        self.headerView = headerViewBuilder()
-        self.footerView = footerViewBuilder()
-        self.cells = cellBuilder()
-    }
-    
-    public init<Item>(
-        @LayoutBuilder headerViewBuilder: () -> [SomeView] = { return [] },
-        @LayoutBuilder footerViewBuilder: () -> [SomeView] = { return [] },
-        items: [Item],
-        @LayoutBuilder cellBuilder: (_ index: Int, _ item: Item) -> [SomeView]
-    ) {
-        self.headerView = headerViewBuilder()
-        self.footerView = footerViewBuilder()
-        self.cells = items.enumerated().reduce([SomeView](), { (seed, next) -> [SomeView] in
-            seed + cellBuilder(next.offset, next.element)
-        })
     }
 }
