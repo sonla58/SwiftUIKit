@@ -47,3 +47,14 @@ import Foundation
 
 extension NSObject: DeclarativeCompatible {}
 #endif
+
+extension Declarative where Base: AnyObject {
+    @discardableResult
+    public func storeReference(refStore: inout Base?) -> Base {
+        if refStore != nil {
+            return refStore!
+        }
+        refStore = base
+        return base
+    }
+}
