@@ -31,25 +31,16 @@
 		1C28A86C26311DF30036951E /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A86B26311DF30036951E /* UI.swift */; };
 		1C28A86D26311DF30036951E /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A86B26311DF30036951E /* UI.swift */; };
 		1C28A87126311E0E0036951E /* UI-View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A87026311E0E0036951E /* UI-View.swift */; };
-		1C28A87226311E0E0036951E /* UI-View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A87026311E0E0036951E /* UI-View.swift */; };
 		1C28A87A26311F030036951E /* UI-Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A87926311F030036951E /* UI-Window.swift */; };
 		1C28A87B26311F040036951E /* UI-Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A87926311F030036951E /* UI-Window.swift */; };
 		1C28A87F26311F4C0036951E /* UI-ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A87E26311F4C0036951E /* UI-ViewController.swift */; };
-		1C28A88026311F4C0036951E /* UI-ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A87E26311F4C0036951E /* UI-ViewController.swift */; };
 		1C28A88626311FDD0036951E /* UI-TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A88526311FDD0036951E /* UI-TextField.swift */; };
-		1C28A88726311FDD0036951E /* UI-TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A88526311FDD0036951E /* UI-TextField.swift */; };
 		1C28A88B2631201D0036951E /* UI-TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A88A2631201D0036951E /* UI-TableViewCell.swift */; };
-		1C28A88C2631201D0036951E /* UI-TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A88A2631201D0036951E /* UI-TableViewCell.swift */; };
 		1C28A8902631206B0036951E /* UI-Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A88F2631206B0036951E /* UI-Label.swift */; };
-		1C28A8912631206B0036951E /* UI-Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A88F2631206B0036951E /* UI-Label.swift */; };
 		1C28A895263120A80036951E /* UI-ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A894263120A80036951E /* UI-ImageView.swift */; };
-		1C28A896263120A80036951E /* UI-ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A894263120A80036951E /* UI-ImageView.swift */; };
 		1C28A89A263121050036951E /* UI-Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A899263121050036951E /* UI-Control.swift */; };
-		1C28A89B263121050036951E /* UI-Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A899263121050036951E /* UI-Control.swift */; };
 		1C28A89F263121440036951E /* UI-CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A89E263121440036951E /* UI-CollectionViewCell.swift */; };
-		1C28A8A0263121440036951E /* UI-CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A89E263121440036951E /* UI-CollectionViewCell.swift */; };
 		1C28A8A42631218A0036951E /* UI-Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A8A32631218A0036951E /* UI-Button.swift */; };
-		1C28A8A52631218A0036951E /* UI-Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A8A32631218A0036951E /* UI-Button.swift */; };
 		1C28A8AA2631223E0036951E /* LayoutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A8A92631223E0036951E /* LayoutBuilder.swift */; };
 		1C28A8AF263122710036951E /* StackViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A8AE263122710036951E /* StackViewProtocol.swift */; };
 		1C28A8B4263122EA0036951E /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A8B3263122EA0036951E /* StackView.swift */; };
@@ -168,6 +159,7 @@
 		1C28A79E262D8BAB0036951E /* DeclarativeExtension */ = {
 			isa = PBXGroup;
 			children = (
+				1C28A9142632DDB00036951E /* UI */,
 				1C28A8C72631242C0036951E /* Styles */,
 				1C28A8A8263122250036951E /* Views */,
 				1C28A8D6263128FD0036951E /* DeclarativeExtension.swift */,
@@ -180,16 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				1C28A86B26311DF30036951E /* UI.swift */,
-				1C28A87026311E0E0036951E /* UI-View.swift */,
 				1C28A87926311F030036951E /* UI-Window.swift */,
-				1C28A87E26311F4C0036951E /* UI-ViewController.swift */,
-				1C28A88526311FDD0036951E /* UI-TextField.swift */,
-				1C28A88A2631201D0036951E /* UI-TableViewCell.swift */,
-				1C28A88F2631206B0036951E /* UI-Label.swift */,
-				1C28A894263120A80036951E /* UI-ImageView.swift */,
-				1C28A899263121050036951E /* UI-Control.swift */,
-				1C28A89E263121440036951E /* UI-CollectionViewCell.swift */,
-				1C28A8A32631218A0036951E /* UI-Button.swift */,
 			);
 			path = UIKitConvenient;
 			sourceTree = "<group>";
@@ -216,6 +199,22 @@
 				1C28A8E0263151700036951E /* UIView+Style.swift */,
 			);
 			path = Styles;
+			sourceTree = "<group>";
+		};
+		1C28A9142632DDB00036951E /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				1C28A88526311FDD0036951E /* UI-TextField.swift */,
+				1C28A88A2631201D0036951E /* UI-TableViewCell.swift */,
+				1C28A88F2631206B0036951E /* UI-Label.swift */,
+				1C28A894263120A80036951E /* UI-ImageView.swift */,
+				1C28A899263121050036951E /* UI-Control.swift */,
+				1C28A89E263121440036951E /* UI-CollectionViewCell.swift */,
+				1C28A8A32631218A0036951E /* UI-Button.swift */,
+				1C28A87026311E0E0036951E /* UI-View.swift */,
+				1C28A87E26311F4C0036951E /* UI-ViewController.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -374,22 +373,13 @@
 				1C28A830262E898E0036951E /* ViewNode.swift in Sources */,
 				1C28A83D262E93840036951E /* View.swift in Sources */,
 				1C28A84F262EB5E40036951E /* LayoutFunction.swift in Sources */,
-				1C28A89B263121050036951E /* UI-Control.swift in Sources */,
 				1C28A86226311A460036951E /* TraitQueryLayoutSet.swift in Sources */,
 				1C28A854262EBE070036951E /* Layout.swift in Sources */,
-				1C28A8A0263121440036951E /* UI-CollectionViewCell.swift in Sources */,
-				1C28A88026311F4C0036951E /* UI-ViewController.swift in Sources */,
 				1C28A85D262EE63E0036951E /* SwiftUIKit+UIKit.swift in Sources */,
-				1C28A88726311FDD0036951E /* UI-TextField.swift in Sources */,
 				1C28A87B26311F040036951E /* UI-Window.swift in Sources */,
 				1C28A86D26311DF30036951E /* UI.swift in Sources */,
 				1C28A836262E89D90036951E /* LayoutBag.swift in Sources */,
 				1C28A7EE262E80D20036951E /* Anchorable.swift in Sources */,
-				1C28A8A52631218A0036951E /* UI-Button.swift in Sources */,
-				1C28A87226311E0E0036951E /* UI-View.swift in Sources */,
-				1C28A88C2631201D0036951E /* UI-TableViewCell.swift in Sources */,
-				1C28A896263120A80036951E /* UI-ImageView.swift in Sources */,
-				1C28A8912631206B0036951E /* UI-Label.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

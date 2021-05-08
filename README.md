@@ -2,46 +2,67 @@
 
 <br/>
 
-[![iOS version support](https://img.shields.io/badge/platform-iOS%2011.0+-8EBEA4)](#Required)
-[![latest release](https://img.shields.io/badge/pod-1.0-C9D9D6)](#Development%20Progress)
-[![test](https://img.shields.io/badge/test-TODO-FFD6B2)](#Development%20Progress)
+[![iOS version support](https://img.shields.io/badge/platform-iOS%2011.0+-8EBEA4?style=flat-square)](#Required)
+[![latest release](https://img.shields.io/cocoapods/v/SwiftUIKit_pro?style=flat-square)](#Development%20Progress)
+[![issues](https://img.shields.io/github/issues/sonla58/SwiftUIKit?style=flat-square)](https://github.com/sonla58/SwiftUIKit/issues)
+[![folks](https://img.shields.io/github/forks/sonla58/SwiftUIKit?style=flat-square)](https://github.com/sonla58/SwiftUIKit/network/members?style=for-the-badge)
+![license](https://img.shields.io/github/license/sonla58/SwiftUIKit?style=flat-square)
 
 # SwiftUIKit
 
 **SwiftUIKit** combines the element of *UIKit* with declarative style from *SwiftUI*. Take a look to see how it magically
 
+<img src="Assets/viewdemo.jpeg" align="right" width="300px" hspace="10px" vspace="0px">
+
 ```swift
 ZStackView {
-    VStackView(spacing: 16, distribution: .fill) {
-        ForEach(Item.allCases) { (index, item) in
+    ZStackView {
+        VStackView(spacing: 20, distribution: .fill) {
+            HStackView(spacing: 20) {
+                ForEach([0,1,2]) { _, _ in
+                    UIView()
+                        .dx.backgroundColor(ThemeManager.shared.current.box2)
+                        .dx.style(UI.ViewStyle.Card2())
+                        .constrainingAspectRatio(ratio: 1)
+                }
+            }
             ZStackView {
-                UILabel()
-                    .dx.text(String(describing: item))
-                    .centeringInParent()
+                VStackView(spacing: 16, distribution: .fill) {
+                    ForEach(Item.allCases) { (index, item) in
+                        ZStackView {
+                            UILabel()
+                                .dx.text(String(describing: item))
+                                .centeringInParent()
+                        }
+                        .dx.backgroundColor(ThemeManager.shared.current.box3)
+                        .dx.style(UI.ViewStyle.CornerRadius(radius: 8))
+                        .dx.startAddGesture
+                        .action { [weak self] in
+                            self?.present(BasicVC(), animated: true, completion: nil)
+                        }
+                        .commitGesture()
+                        .sizing(width: nil, height: 48)
+                    }
+                    UIView()
+                }
+                .fillingParent(insets: 20)
             }
-            .dx.backgroundColor(ThemeManager.shared.current.box3)
-            .dx.style(UI.ViewStyle.CornerRadius(radius: 8))
-            .dx.startAddGesture
-            .action { [weak self] in
-                self?.present(BasicVC(), animated: true, completion: nil)
-            }
-            .commitGesture()
-            .sizing(width: nil, height: 48)
+            .dx.backgroundColor(ThemeManager.shared.current.background2)
+            .dx.style(UI.ViewStyle.Card2())
         }
-        
-        UIView()
+        .fillingParent(insets: 20)
     }
-    .fillingParent(insets: 20)
+    .dx.backgroundColor(ThemeManager.shared.current.box1)
+    .dx.style(UI.ViewStyle.Card1())
+    .fillingParent()
 }
-.dx.backgroundColor(ThemeManager.shared.current.background2)
-.dx.style(UI.ViewStyle.Card2())
 ```
 
 <br/>
 
 # Special Thanks Layoutless team
 
-This project was strongly inspired by [Layoutless](https://github.com/DeclarativeHub/Layoutless). Most of the ideas and implementation in the core system layout was reused from Layoutless. I just made some changed for rename, made a new API style for the layout system and it enable `DeclarativeExtension`.
+This project was strongly inspired by [Layoutless](https://github.com/DeclarativeHub/Layoutless). Most of the ideas and implementation in the core system layout were reused from Layoutless. I just made some changed for rename, made a new API style for the layout system and it enables `DeclarativeExtension`.
 
 # Features
 - [x] Build layout without interface builder with fancy declarative style.
@@ -55,7 +76,7 @@ This project was strongly inspired by [Layoutless](https://github.com/Declarativ
 # Requirement
 
 - iOS 11+
-- XCode 11+
+- XCode 12+
 - Swift 5.3+
 
 # Installation

@@ -1,5 +1,5 @@
 //
-//  UI-TextField.swift
+//  UI-ImageView.swift
 //  SwiftUIKit
 //
 //  Created by finos.son.le on 22/04/2021.
@@ -9,21 +9,36 @@ import UIKit
 
 extension UI {
     
-    open class TextField: UITextField {
+    open class ImageView: UIImageView {
         
         /// A closure that gets called with `self` as an argument on `layoutSubviews`.
         /// Use it to configure styles that are derived from the view bounds.
-        public var onLayout: (TextField) -> Void = { _ in }
+        public var onLayout: (ImageView) -> Void = { _ in }
         
         public var layoutBag = LayoutBag()
         
-        public var textInsets: UIEdgeInsets = .zero
+        private var layouts: [SomeView] = []
         
-        open override var intrinsicContentSize: CGSize {
-            var size = super.intrinsicContentSize
-            size.width += textInsets.right + textInsets.left
-            size.height += textInsets.top + textInsets.bottom
-            return size
+        public convenience init(_ layouts: [SomeView]) {
+            self.init(frame: .zero)
+            self.layouts = layouts
+            
+            setup()
+            defineLayout()
+        }
+        
+        public convenience init(@LayoutBuilder _ layoutBuilder: () -> [SomeView]) {
+            self.init(frame: .zero)
+            self.layouts = layoutBuilder()
+            
+            setup()
+            defineLayout()
+        }
+        
+        public override init(image: UIImage? = nil) {
+            super.init(image: image)
+            setup()
+            defineLayout()
         }
         
         public override init(frame: CGRect) {
@@ -46,14 +61,6 @@ extension UI {
             }
         }
         
-        open override func editingRect(forBounds bounds: CGRect) -> CGRect {
-            return super.editingRect(forBounds: bounds).inset(by: textInsets)
-        }
-        
-        open override func textRect(forBounds bounds: CGRect) -> CGRect {
-            return super.textRect(forBounds: bounds).inset(by: textInsets)
-        }
-        
         open func setup() {
         }
         
@@ -66,3 +73,4 @@ extension UI {
         }
     }
 }
+

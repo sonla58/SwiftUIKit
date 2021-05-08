@@ -16,6 +16,24 @@ extension UI {
         
         public var layoutBag = LayoutBag()
         
+        private var layouts: [SomeView] = []
+        
+        public convenience init(_ layouts: [SomeView]) {
+            self.init(frame: .zero)
+            self.layouts = layouts
+            
+            setup()
+            defineLayout()
+        }
+        
+        public convenience init(@LayoutBuilder _ layoutBuilder: () -> [SomeView]) {
+            self.init(frame: .zero)
+            self.layouts = layoutBuilder()
+            
+            setup()
+            defineLayout()
+        }
+        
         public override init(frame: CGRect) {
             super.init(frame: frame)
             setup()
@@ -44,7 +62,10 @@ extension UI {
         }
         
         open var subviewsLayout: SomeView {
-            return EmptyLayout()
+            if layouts.isEmpty {
+                return EmptyLayout()
+            }
+            return group(layouts)
         }
         
         open override func didMoveToSuperview() {
