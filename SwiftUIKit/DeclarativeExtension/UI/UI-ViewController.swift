@@ -16,7 +16,7 @@ extension UI {
         private var layouts: [SomeView] = []
         
         public convenience init(_ layouts: [SomeView]) {
-            self.init(frame: .zero)
+            self.init(nibName: nil, bundle: nil)
             self.layouts = layouts
             
             setup()
@@ -24,7 +24,7 @@ extension UI {
         }
         
         public convenience init(@LayoutBuilder _ layoutBuilder: () -> [SomeView]) {
-            self.init(frame: .zero)
+            self.init(nibName: nil, bundle: nil)
             self.layouts = layoutBuilder()
             
             setup()
@@ -54,6 +54,11 @@ extension UI {
         }
         
         open func setup() {
+            if #available(iOS 13.0, *) {
+                self.view.backgroundColor = UIColor.systemBackground
+            } else {
+                self.view.backgroundColor = .white
+            }
         }
         
         open func defineLayout() {
@@ -61,6 +66,9 @@ extension UI {
         }
         
         open var subviewsLayout: SomeView {
+            if layouts.count > 0 {
+                return group(layouts)
+            }
             return EmptyLayout()
         }
         
