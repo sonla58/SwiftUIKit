@@ -23,7 +23,7 @@ public class ZStackView: UI.View {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("Not support init from coder")
     }
     
     public override var subviewsLayout: SomeView {
