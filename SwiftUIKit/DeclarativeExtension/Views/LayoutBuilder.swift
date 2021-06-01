@@ -37,34 +37,3 @@ public struct LayoutBuilder {
         layout
     }
 }
-
-@_functionBuilder
-public struct SectionListBuilder {
-    
-    public typealias Expression = SectionList
-    public typealias Component = [SectionList]
-    
-    public static func buildBlock(_ layouts: Component...) -> Component {
-        layouts.flatMap { $0 }
-    }
-    
-    public static func buildExpression(_ layout: Expression) -> Component {
-        [layout]
-    }
-    
-    public static func buildExpression(_ layouts: Component) -> Component {
-        layouts
-    }
-    
-    public static func buildIf(_ layouts: Component?) -> Component {
-        layouts ?? []
-    }
-    
-    public static func buildEither(first layout: Component) -> Component {
-        layout
-    }
-    
-    public static func buildEither(second layout: Component) -> Component {
-        layout
-    }
-}

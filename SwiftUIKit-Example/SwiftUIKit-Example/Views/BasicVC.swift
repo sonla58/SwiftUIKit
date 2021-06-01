@@ -17,27 +17,17 @@ class BasicVC: UI.ViewController {
     }
     
     override var subviewsLayout: SomeView {
-        ListView(.plain) {
-            SectionList(headerViewBuilder: { () -> [SomeView] in
-                ZStackView {
-                    UILabel()
-                        .dx.text("Header")
-                        .centeringVerticallyInParent()
-                        .stickingToParentEdges(left: 16)
-                }
-                .dx.backgroundColor(.white)
-                .sizing(width: nil, height: 44)
-                .fillingParent()
-            }, footerViewBuilder: { () -> [SomeView] in
-                return []
-            }, items: Array(0...100)) { (index, item) in
-                UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-                    .dx.style { (cell) in
-                        cell.textLabel?.text = "\(item)"
-                    }
-            }
+        UI.Label {
+            UIView()
+                .dx.backgroundColor(.red)
+                .sizing(width: 100, height: 100)
+                .fillingParent(insets: 30)
         }
-        .fillingParent()
+        .dx.backgroundColor(.green)
+        .dx.gestureOnTap { _ in
+            print("ok")
+        }
+        .centeringInParent()
     }
     
     deinit {

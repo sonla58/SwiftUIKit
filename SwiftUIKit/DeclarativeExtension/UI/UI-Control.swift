@@ -63,7 +63,10 @@ extension UI {
         }
 
         open var subviewsLayout: SomeView {
-            return EmptyLayout()
+            if layouts.isEmpty {
+                return EmptyLayout()
+            }
+            return group(layouts)
         }
     }
 }
