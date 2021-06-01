@@ -90,11 +90,9 @@ class HomeVC: UI.ViewController {
                                             }
                                             .dx.backgroundColor(ThemeManager.shared.current.box3)
                                             .dx.style(UI.ViewStyle.CornerRadius(radius: 8))
-                                            .dx.startAddGesture
-                                            .action { [weak self] in
+                                            .dx.gestureOnTap { [weak self] _ in
                                                 self?.present(BasicVC(), animated: true, completion: nil)
                                             }
-                                            .commitGesture()
                                             .sizing(width: nil, height: 48)
                                         }
                                         

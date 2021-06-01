@@ -7,67 +7,47 @@
 
 import UIKit
 
-public class DxGestureWrapper<Base: UIView> {
-    var base: Base
-    var onTap: (() -> Void)?
-    private var observation: NSKeyValueObservation?
-    
-    private var gestures: [UIGestureRecognizer] = []
-    
-    public init(_ base: Base) {
-        self.base = base
-    }
-    
-    public func action(onTap: @escaping ()-> Void) -> Self {
-        self.onTap = onTap
-        return self
-    }
-    
-    public func commitGesture() -> Base {
-        setup()
+extension Declarative where Base: UIView {
+    public func gestureOnTap(_ action: @escaping (_ gesture: UITapGestureRecognizer) -> Void) -> Base {
+        base.isUserInteractionEnabled = true
+        let gesture = UITapGestureRecognizer()
+        gesture.addAction {
+            action(gesture)
+        }
+        
+        base.addGestureRecognizer(gesture)
         return base
     }
+}
+
+class GestureActionBlocker {
+    var block: () -> Void
     
-    private func setup() {
-        gestures.forEach { (gesture) in
-            self.base.removeGestureRecognizer(gesture)
-        }
-        gestures = []
-        
-        if let _ = self.onTap {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(actionOnTap))
-            base.addGestureRecognizer(tapGesture)
-        }
-    }
-    
-    @objc private func actionOnTap() {
-        onTap?()
-    }
-    
-    deinit {
-        print("deinit")
+    init(block: @escaping () -> Void) {
+        self.block = block
     }
 }
 
-extension Declarative where Base: UIView {
-    public var startAddGesture: DxGestureWrapper<Base> {
-        let wr = DxGestureWrapper(base)
-        base.gestureWrapper = wr
-        return wr
-    }
-}
-
-extension NSObject {
+extension UIGestureRecognizer {
     private struct AssociatedKeys {
-        static var gestureWrapper = "gestureWrapper"
+        static var actionBlock = "actionBlock"
     }
     
-    fileprivate var gestureWrapper: AnyObject? {
+    private var actionBlock: GestureActionBlocker? {
         get {
-            objc_getAssociatedObject(self, &AssociatedKeys.gestureWrapper) as AnyObject?
+            objc_getAssociatedObject(self, &AssociatedKeys.actionBlock) as? GestureActionBlocker
         }
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.gestureWrapper, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &AssociatedKeys.actionBlock, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
+    }
+    
+    @objc private func executeActionBlock() {
+        actionBlock?.block()
+    }
+    
+    func addAction(_ action: @escaping () -> Void) {
+        self.actionBlock = GestureActionBlocker(block: action)
+        self.addTarget(self, action: #selector(executeActionBlock))
     }
 }
