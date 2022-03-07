@@ -7,7 +7,7 @@
 
 import Foundation
 
-@_functionBuilder
+@resultBuilder
 public struct LayoutBuilder {
     
     public typealias Expression = SomeView

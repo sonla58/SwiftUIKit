@@ -10,33 +10,15 @@ import UIKit
 public class VStackView: UIStackView {
     public var configure: (UIStackView) -> Void = {_ in}
     
-    public var layouts: [SomeView]
+    private var layouts: [SomeView]
     
     public var layoutBag = LayoutBag()
     
-    required public init(
+    public init(
         spacing: CGFloat = 0,
         distribution: UIStackView.Distribution = .fillEqually,
         alignment: UIStackView.Alignment = .fill,
-        layouts: [SomeView]
-    ) {
-        self.layouts = layouts
-        
-        super.init(frame: .zero)
-        
-        self.axis = .vertical
-        self.spacing = spacing
-        self.distribution = distribution
-        self.alignment = alignment
-        
-        defineLayout()
-    }
-    
-    required public init(
-        spacing: CGFloat = 0,
-        distribution: UIStackView.Distribution = .fillEqually,
-        alignment: UIStackView.Alignment = .fill,
-        @LayoutBuilder layoutBuilder: () -> [SomeView]
+        @LayoutBuilder _ layoutBuilder: () -> [SomeView]
     ) {
         self.layouts = layoutBuilder()
         
