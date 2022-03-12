@@ -273,6 +273,16 @@ extension View where Node: UIView {
             return node
         }
     }
+    
+    /// Layout the given layout within the node and return the layout that has the node as a root node.
+    public func addingLayout(@LayoutBuilder _ layoutBuilder: () -> [SomeView]) -> Layout<Node> {
+        let layoutGroup = group(layoutBuilder())
+        return Layout { revertable in
+            let node = self.makeViewNode(revertable)
+            revertable.append(layoutGroup.makeSomeViewNode(revertable).layout(in: node))
+            return node
+        }
+    }
 }
 
 // MARK: Grouping
