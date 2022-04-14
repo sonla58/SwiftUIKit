@@ -7,17 +7,16 @@
 
 import Foundation
 
-@_functionBuilder
+@resultBuilder
 public struct LayoutBuilder {
     
-    public typealias Expression = SomeView
     public typealias Component = [SomeView]
     
     public static func buildBlock(_ layouts: Component...) -> Component {
         layouts.flatMap { $0 }
     }
     
-    public static func buildExpression(_ layout: Expression) -> Component {
+    public static func buildExpression(_ layout: SomeView) -> Component {
         [layout]
     }
     
@@ -29,11 +28,15 @@ public struct LayoutBuilder {
         layouts ?? []
     }
     
-    public static func buildEither(first layout: Component) -> Component {
-        layout
+    public static func buildOptional(_ layout: Component?) -> Component {
+        layout ?? []
     }
     
-    public static func buildEither(second layout: Component) -> Component {
-        layout
+    public static func buildEither(first: Component) -> Component {
+        first
+    }
+    
+    public static func buildEither(second: Component) -> Component {
+        second
     }
 }

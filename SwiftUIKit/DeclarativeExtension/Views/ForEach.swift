@@ -7,16 +7,16 @@
 
 import Foundation
 
-public struct ForEach<Item> {
+public struct ForEach<Data> where Data: RandomAccessCollection {
     public var layouts: [SomeView]
-    public var items: [Item]
+    public var items: Data
     
-    public init(_ items: [Item], layouts: [SomeView]) {
+    public init(_ items: Data, layouts: [SomeView]) {
         self.items = items
         self.layouts = layouts
     }
     
-    public init(_ items: [Item], @LayoutBuilder layoutBuilder: (Int, Item) -> [SomeView]) {
+    public init(_ items: Data, @LayoutBuilder layoutBuilder: (Int, Data.Element) -> [SomeView]) {
         self.items = items
         self.layouts = items.enumerated().reduce([SomeView](), { (seed, next) -> [SomeView] in
             seed + layoutBuilder(next.offset, next.element)

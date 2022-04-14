@@ -17,17 +17,39 @@ class BasicVC: UI.ViewController {
     }
     
     override var subviewsLayout: SomeView {
-        UI.Label {
+        ZStackView {
+            if false {
+                UI.Label {
+                    UIView()
+                        .dx.backgroundColor(.red)
+                        .sizing(width: 100, height: 100)
+                        .fillingParent(insets: 30)
+                }
+                .dx.backgroundColor(.green)
+                .dx.gestureOnTap { _ in
+                    print("ok")
+                }
+                .stickingToParentEdges(left: 0, top: 0)
+            } else {
+                UI.Label {
+                    UIView()
+                        .dx.backgroundColor(.blue)
+                        .sizing(width: 100, height: 100)
+                        .fillingParent(insets: 30)
+                }
+                .dx.backgroundColor(.yellow)
+                .dx.gestureOnTap { _ in
+                    print("ok")
+                }
+                .stickingToParentEdges(left: 0, top: 0)
+            }
+            
             UIView()
-                .dx.backgroundColor(.red)
-                .sizing(width: 100, height: 100)
-                .fillingParent(insets: 30)
+                .dx.backgroundColor(.black)
+                .sizing(width: 50, height: 50)
+                .centeringInParent()
         }
-        .dx.backgroundColor(.green)
-        .dx.gestureOnTap { _ in
-            print("ok")
-        }
-        .centeringInParent()
+        .fillingParent()
     }
     
     deinit {

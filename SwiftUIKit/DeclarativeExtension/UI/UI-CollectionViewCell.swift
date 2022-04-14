@@ -19,14 +19,6 @@ extension UI {
         
         private var layouts: [SomeView] = []
         
-        public convenience init(_ layouts: [SomeView]) {
-            self.init(frame: .zero)
-            self.layouts = layouts
-            
-            setup()
-            defineLayout()
-        }
-        
         public convenience init(@LayoutBuilder _ layoutBuilder: () -> [SomeView]) {
             self.init(frame: .zero)
             self.layouts = layoutBuilder()

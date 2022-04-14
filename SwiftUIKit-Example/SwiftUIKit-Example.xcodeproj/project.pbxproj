@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,29 +11,11 @@
 		1C28A7BD262E7D9F0036951E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C28A7BC262E7D9F0036951E /* Assets.xcassets */; };
 		1C28A7C0262E7D9F0036951E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C28A7BE262E7D9F0036951E /* LaunchScreen.storyboard */; };
 		1C28A7D0262E7E740036951E /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A7CF262E7E740036951E /* HomeVC.swift */; };
-		1C28A81C262E84570036951E /* SwiftUIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C28A81B262E84570036951E /* SwiftUIKitCore.framework */; };
-		1C28A81D262E84570036951E /* SwiftUIKitCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1C28A81B262E84570036951E /* SwiftUIKitCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1C28A823262E850D0036951E /* SwiftUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C28A822262E850D0036951E /* SwiftUIKit.framework */; };
-		1C28A824262E850D0036951E /* SwiftUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1C28A822262E850D0036951E /* SwiftUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1C28A8DF26314DF10036951E /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A8DE26314DF10036951E /* Themes.swift */; };
 		1C28A8E6263155410036951E /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A8E5263155410036951E /* Styles.swift */; };
 		1C28A8F5263172320036951E /* BasicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C28A8F4263172320036951E /* BasicVC.swift */; };
+		E184120427D7011700680F85 /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = E184120327D7011700680F85 /* SwiftUIKit */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		1C28A7D7262E7F670036951E /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				1C28A81D262E84570036951E /* SwiftUIKitCore.framework in Embed Frameworks */,
-				1C28A824262E850D0036951E /* SwiftUIKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1C28A7B0262E7D9D0036951E /* SwiftUIKit-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUIKit-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +32,7 @@
 		1C28A8DE26314DF10036951E /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 		1C28A8E5263155410036951E /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		1C28A8F4263172320036951E /* BasicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicVC.swift; sourceTree = "<group>"; };
+		E184120227D700F800680F85 /* SwiftUIKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftUIKit; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C28A81C262E84570036951E /* SwiftUIKitCore.framework in Frameworks */,
-				1C28A823262E850D0036951E /* SwiftUIKit.framework in Frameworks */,
+				E184120427D7011700680F85 /* SwiftUIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +50,7 @@
 		1C28A7A7262E7D9D0036951E = {
 			isa = PBXGroup;
 			children = (
+				E184120127D700F800680F85 /* Packages */,
 				1C28A7B2262E7D9D0036951E /* SwiftUIKit-Example */,
 				1C28A7B1262E7D9D0036951E /* Products */,
 				1C28A7D3262E7F670036951E /* Frameworks */,
@@ -141,6 +124,14 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		E184120127D700F800680F85 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				E184120227D700F800680F85 /* SwiftUIKit */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -151,13 +142,15 @@
 				1C28A7AC262E7D9D0036951E /* Sources */,
 				1C28A7AD262E7D9D0036951E /* Frameworks */,
 				1C28A7AE262E7D9D0036951E /* Resources */,
-				1C28A7D7262E7F670036951E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "SwiftUIKit-Example";
+			packageProductDependencies = (
+				E184120327D7011700680F85 /* SwiftUIKit */,
+			);
 			productName = "SwiftUIKit-Example";
 			productReference = 1C28A7B0262E7D9D0036951E /* SwiftUIKit-Example.app */;
 			productType = "com.apple.product-type.application";
@@ -409,6 +402,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E184120327D7011700680F85 /* SwiftUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftUIKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1C28A7A8262E7D9D0036951E /* Project object */;
 }

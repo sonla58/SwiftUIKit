@@ -92,6 +92,29 @@ extension View where Node: Anchorable {
     }
 }
 
+// MARK: Insetting
+extension View where Node: Anchorable {
+
+    /// Inset the node by wrapping it in a dummy view and filling it using the given insets.
+    public func insetting(leftBy left: CGFloat, rightBy right: CGFloat, topBy top: CGFloat, bottomBy bottom: CGFloat) -> Layout<UIView> {
+        return insetting(by: UIEdgeInsets(top: top, left: left, bottom: bottom, right: right))
+    }
+
+    /// Inset the node by wrapping it in a dummy view and filling it using the given insets.
+    public func insetting(by insets: CGFloat) -> Layout<UIView> {
+        return insetting(by: UIEdgeInsets(top: insets, left: insets, bottom: insets, right: insets))
+    }
+
+    /// Inset the node by wrapping it in a dummy view and filling it using the given insets.
+    public func insetting(by insets: UIEdgeInsets) -> Layout<UIView> {
+        return Layout { revertable in
+            let container = UIView()
+            revertable.append(self.fillingParent(insets: insets).makeSomeViewNode(revertable).layout(in: container))
+            return container
+        }
+    }
+}
+
 extension View where Node: Anchorable {
     public func centeringInParent(xOffset: Length? = 0, yOffset: Length? = 0, relativeToSafeArea: Bool) -> Layout<ChildNode<Node>> {
         return layout { (parent, node, revertable) in
@@ -250,30 +273,15 @@ extension View where Node: UIView {
             return node
         }
     }
-}
-
-// MARK: Stacking
-
-/// Stack an array of views in a stack view.
-public func stack(_ views: [SomeView], axis: NSLayoutConstraint.Axis, spacing: CGFloat = 0, distribution: UIStackView.Distribution = .fill, alignment: UIStackView.Alignment = .fill, configure: @escaping (UIStackView) -> Void = { _ in }) -> Layout<UIStackView> {
-    return Layout { revertable in
-        let stackView = UIStackView()
-        stackView.axis = axis
-        stackView.spacing = spacing
-        stackView.distribution = distribution
-        stackView.alignment = alignment
-        views.forEach {
-            revertable.append($0.layout(in: stackView))
+    
+    /// Layout the given layout within the node and return the layout that has the node as a root node.
+    public func addingLayout(@LayoutBuilder _ layoutBuilder: () -> [SomeView]) -> Layout<Node> {
+        let layoutGroup = group(layoutBuilder())
+        return Layout { revertable in
+            let node = self.makeViewNode(revertable)
+            revertable.append(layoutGroup.makeSomeViewNode(revertable).layout(in: node))
+            return node
         }
-        configure(stackView)
-        return stackView
-    }
-}
-
-/// Stack an array of views in a stack view.
-public func stack(_ axis: NSLayoutConstraint.Axis, spacing: CGFloat = 0, distribution: UIStackView.Distribution = .fill, alignment: UIStackView.Alignment = .fill, configure: @escaping (UIStackView) -> Void = { _ in }) -> ((SomeView...) -> Layout<UIStackView>) {
-    return { (views: SomeView...) -> Layout<UIStackView> in
-        return stack(views, axis: axis, spacing: spacing, distribution: distribution, alignment: alignment, configure: configure)
     }
 }
 
@@ -295,15 +303,10 @@ public class ViewGroup: ViewNode {
 }
 
 /// Group an array of layouts that should be laid out in the same container.
-public func group(_ layouts: [SomeView]) -> Layout<ViewGroup> {
+func group(_ layouts: [SomeView]) -> Layout<ViewGroup> {
     return Layout { revertable in
         return ViewGroup(layouts)
     }
-}
-
-/// Group an array of layouts that should be laid out in the same container.
-public func group(_ layouts: SomeView...) -> Layout<ViewGroup> {
-    return group(layouts)
 }
 
 // MARK: Configuring intrinsic size behaviour
