@@ -1,11 +1,10 @@
-// swift-tools-version: 5.3
+// swift-tools-version: 5.5
 
 import PackageDescription
 
 let package = Package(
     name: "SwiftUIKit",
     platforms: [.iOS(.v11)],
-    swiftLanguageVersions: [.v5],
     products: [
         .library(
             name: "SwiftUIKit",
@@ -17,5 +16,6 @@ let package = Package(
             name: "SwiftUIKit",
             path: "SwiftUIKit"
         )
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )
